@@ -1,0 +1,62 @@
+﻿@using System.IO
+@using BotMockWatcher.Models
+@model ElementView
+@{
+    Layout = "_Layout";
+}
+
+<h1>Index of @ViewBag.Title</h1>
+<table>
+    <tbody>
+        <tr>
+            <th valign="top">
+                Img
+            </th>
+            <th>
+                <a>Name</a>
+            </th>
+            <th>
+                <a>Last modified</a>
+            </th>
+            <th>
+                <a>Size</a>
+            </th>
+        </tr>
+        <tr>
+            <th colspan="4">
+                <hr>
+            </th>
+        </tr>
+        @if(!string.IsNullOrWhiteSpace(Model.Route))
+        {
+        <tr>
+            <td valign="top">
+                <img src="/icons/back.gif" alt="[PARENTDIR]">
+            </td>
+            <td>
+                <a href="../">Parent Directory</a>
+            </td>
+            <td>&nbsp;</td>
+            <td align="right">  - </td>
+        </tr>
+        }
+        @foreach(var elem in Model.Elements)
+        {
+            <tr>
+                <td valign="top">
+                <img src="/icons/folder.gif" alt="[DIR]">
+            </td>
+            <td>
+                <a href="@elem.Name">@elem.Name</a>
+            </td>
+                <td align="right">@elem.LastModified.ToString("yyyy-MM-dd hh:mm  ")</td>
+            <td align="right">@elem.Size</td>
+        </tr>
+        }
+        <tr>
+            <th colspan="4">
+                <hr>
+            </th>
+        </tr>
+    </tbody>
+</table>
